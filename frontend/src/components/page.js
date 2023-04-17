@@ -8,7 +8,7 @@ export default function Page({ toggleOverlay, isArchive }) {
     useEffect(() => {
         let ignore = false;
 
-        fetch('http://localhost:4000/api/todos')
+        fetch('http://trioxtron.mooo.com:4000/api/todos')
             .catch((error) => {
                 console.error(error)
             })

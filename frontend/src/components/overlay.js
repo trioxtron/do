@@ -11,7 +11,7 @@ export default function Overlay({ isOpen, onClose}) {
         async function startFetch () {
             if (!ignore && newTodoDescription !== null) {
                 ignore = true;
-                await fetch("http://localhost:4000/api/todo", {
+                await fetch("http://trioxtron.mooo.com:4000/api/todo", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

@@ -2,13 +2,13 @@ import { IconCircle, IconCircleCheck, IconTrash } from "@tabler/icons-react";
 
 export default function Todo(props) {
     const deleteTodo = () => {
-        fetch(`http://localhost:4000/api/todo/${props.todoID}`, { method: 'DELETE' })
+        fetch(`http://trioxtron.mooo.com:4000/api/todo/${props.todoID}`, { method: 'DELETE' })
             .catch((error) => {
                 console.error(error)
             })
     }
     const patchTodo = () => {
-        fetch(`http://localhost:4000/api/todo/${props.todoID}`, { method: 'PATCH' })
+        fetch(`http://trioxtron.mooo.com:4000/api/todo/${props.todoID}`, { method: 'PATCH' })
             .catch((error) => {
                 console.error(error)
             })

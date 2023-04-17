@@ -5,13 +5,13 @@ export default function Nav(props) {
     if (props.site == "main") {
         return (
             <div className='flex justify-between'>
-                <IconChecklist className='text-soft-purple' />
+                <IconChecklist className='text-soft-purple hover:scale-110' />
             </div>
         );
     } else if (props.site == "archive") {
         return (
             <div className='flex justify-between'>
-                <IconHome className='text-soft-purple' />
+                <IconHome className='text-soft-purple hover:scale-110' />
             </div>
         );
     }

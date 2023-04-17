@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { IconPlus } from "@tabler/icons-react";
 import { Fragment } from "react";
 
-export default function Overlay({ isOpen, onClose}) {
+export default function Overlay({ isOpen, onClose, setTodos }) {
     const newTodoDescriptionInput = useRef();
     const [newTodoDescription, setNewTodoDescription] = useState(null);
     useEffect(() => {
         let ignore = false;
 
-        async function startFetch () {
+        async function startFetch() {
             if (!ignore && newTodoDescription !== null) {
                 ignore = true;
                 await fetch("http://trioxtron.mooo.com:4000/api/todo", {
@@ -19,9 +19,18 @@ export default function Overlay({ isOpen, onClose}) {
                     },
                     body: JSON.stringify({ "description": newTodoDescription, "completed": false })
                 })
-                    .then(response => response.json())
-                    .then(response => console.log(JSON.stringify(response)))
-                    .then(() => console.log(newTodoDescription));
+                    .then((res) => {
+                        if (!res.ok) {
+                            throw Error(res.statusText)
+                        }
+                        return res.json();
+                    })
+                    .then((data) => {
+                        if (data === undefined) {
+                            throw Error("Data is undefined");
+                        }
+                        setTodos(data);
+                    })
             }
         }
         startFetch();

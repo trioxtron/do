@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Todo from './todo';
 import { IconPlus } from '@tabler/icons-react';
 
-export default function Page({ toggleOverlay, isArchive }) {
-    const [receivedTodos, setReceivedTodos] = useState(null);
+export default function Page({ toggleOverlay, isArchived, todos, setTodos }) {
 
     useEffect(() => {
         let ignore = false;
@@ -23,7 +22,7 @@ export default function Page({ toggleOverlay, isArchive }) {
                     throw Error("Data is undefined");
                 }
                 if (!ignore) {
-                    setReceivedTodos(data);
+                    setTodos(data);
                 }
             });
 
@@ -32,14 +31,11 @@ export default function Page({ toggleOverlay, isArchive }) {
         }
     }, []);
 
-    if (!receivedTodos) return <div>Loading...</div>;
-    const todoRender = receivedTodos.map((todo) => {
-        if (!isArchive &&  todo.completed == false) {
-            return <Todo key={todo.description} todoDescription={todo.description} todoID={todo.ID} todoCompleted={todo.completed} />;
-        } else if (isArchive && todo.completed == true) {
-            return <Todo key={todo.description} todoDescription={todo.description} todoID={todo.ID} todoCompleted={todo.completed} />;
+    if (!todos) return <div>Loading...</div>;
+    const todoRender = todos.map((todo) => {
+        if (!isArchived &&  todo.completed === false || isArchived && todo.completed === true) {
+            return <Todo key={todo.description} todoCreatedAt={todo.CreatedAt} todoDescription={todo.description} todoID={todo.ID} todoCompleted={todo.completed} todo={todo} todoReload={setTodos} />;
         }
-
     })
 
 
